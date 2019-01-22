@@ -14,7 +14,8 @@ function catTree($categories, $parent = 0, $level = 0) {
 
   foreach ($categories as $category) {
     if ($category['parent'] == $parent) {
-      echo str_repeat("-", $level) . $category['title'] . "<br>";
+      echo str_repeat("-", $level) . $category['title'] .
+      "<span style='margin-left: 30px'>->ID of a parent: </span>" . $parent . "<br>";
       catTree($categories, $category['id'], $level + 1);
     }
   }
