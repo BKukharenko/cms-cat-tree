@@ -2,13 +2,12 @@
 
 $categories = [
   ['title' => 'First Category', 'id' => 1, 'parent' => NULL],
-  ['title' => 'Second Category', 'id' => 2, 'parent' => 1],
+  ['title' => 'Second Category', 'id' => 2, 'parent' => 4],
   ['title' => 'Third Category', 'id' => 3, 'parent' => 1],
   ['title' => 'Fourth Category', 'id' => 4, 'parent' => 3],
   ['title' => 'Fifth Category', 'id' => 5, 'parent' => 2],
   ['title' => 'Sixth Category', 'id' => 6, 'parent' => 5],
 ];
-
 
 function catTree($categories, $parent = 0, $level = 0) {
 
@@ -22,3 +21,26 @@ function catTree($categories, $parent = 0, $level = 0) {
 }
 
 catTree($categories);
+
+function secondCatTree(array $categories, $parentId = 0) {
+  $result = [];
+
+  foreach ($categories as $category) {
+    if ($category['parent'] == $parentId) {
+      $children = secondCatTree($categories, $category['id']);
+      if ($children) {
+        $category['children'] = $children;
+      }
+      $result = ['children' => $category];
+    }
+  }
+
+  return var_dump($result);
+}
+
+echo secondCatTree($categories);
+
+
+
+
+
